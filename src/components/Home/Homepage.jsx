@@ -125,8 +125,9 @@ query {
 `;
 
 const Homepage = () => {
-
-  const { data, error, loading } = useQuery(HOMEPAGE_LINKS);
+  
+      const { data, error, loading } = useQuery(HOMEPAGE_LINKS);
+  
   return (
     <>
       <MetaTags>
@@ -138,7 +139,7 @@ const Homepage = () => {
           <div className="row">
             <div className="col-12 col-md-6">
               <div className="intro">
-                {homeData?.homepage?.map((link, i) => (
+                {React.Children.toArray(homeData?.homepage?.map((link, i) => (
                   <>
                     <Link to={`/${link.selectionHandle}`}>
                       <h1 data-aos="slide-right" data-aos-delay={i * 1000} className={`hello${i}`}>
@@ -146,7 +147,7 @@ const Homepage = () => {
                     </Link>
 
                   </>
-                ))}
+                )))}
                 <Typist
                   className="d-none d-md-block"
                   startDelay={3500}
