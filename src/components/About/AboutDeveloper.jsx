@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import frontend from "../../assets/images/frontend.svg";
-import backend from "../../assets/images/backend.svg";
-import deploy from "../../assets/images/deployments.svg";
 import ReactHtmlParser from "react-html-parser";
 
 const Wrapper = styled.section`
@@ -74,21 +71,11 @@ const Wrapper = styled.section`
   }
 `;
 
-const AboutDeveloper = () => {
-  const [aboutDeveloper, setAboutDeveloper] = useState([]);
-
-  useEffect(() => {
-    fetch("https://portfolio-django-backend.herokuapp.com/api/about/developer/")
-      .then((res) => res.json())
-      .then(setAboutDeveloper);
-  }, []);
-
+const AboutDeveloper = ({ title, content, devLogos }) => {
   return (
     <Wrapper>
-      {aboutDeveloper &&
-        aboutDeveloper.map((item) => {
-          return (
-            <div key={item.id} id="developer" style={{ backgroundImage: `url(${item.developer_background_img})` }}>
+
+            <div id="developer" >
               <div className="container">
                 <div className="row">
                   <h1 className="mt-5 do-as-developer">
@@ -97,27 +84,19 @@ const AboutDeveloper = () => {
                 </div>
                 <div className="row mt-5">
                   <div className="col-12 col-md-8 mx-auto">
-                    <span className="dev-text">{ReactHtmlParser(item.about_developer_text)}</span>
+                    <span className="dev-text">{ReactHtmlParser(content)}</span>
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-4 icon">
-                    <img className="img-fluid" src={frontend} alt="" />
-                    <h1 className="full-stack">Frontend</h1>
-                  </div>
-                  <div className="col-4 icon">
-                    <img className="img-fluid" src={backend} alt="" />
-                    <h1 className="full-stack">Backend</h1>
-                  </div>
-                  <div className="col-4 icon">
-                    <img className="img-fluid" src={deploy} alt="" />
-                    <h1 className="full-stack deploy">Deployments</h1>
-                  </div>
+                {React.Children.toArray(devLogos?.map((logo) => (
+                    <div className="col-4 icon">
+                      <img className="img-fluid" src={`http://localhost:8000${logo?.developmentLogo?.rendition?.url}`} alt="" />
+                      <h1 className="full-stack">Frontend</h1>
+                    </div>
+                )))}
                 </div>
               </div>
             </div>
-          );
-        })}
     </Wrapper>
   );
 };

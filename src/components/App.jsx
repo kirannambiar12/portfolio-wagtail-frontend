@@ -7,6 +7,7 @@ import { client } from '../utils';
 import theme from "../styles/Theme";
 import Homepage from './Home/Homepage';
 import About from './About/About';
+import Technologies from './Work/Technologies';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NotFound from './NotFound';
 import { ToastProvider } from "react-toast-notifications";
@@ -14,6 +15,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "aos/dist/aos.css";
 import AOS from "aos";
 import "../styles/index.css";
+import Contact from "./Contact/Contact";
 
 
 function App() {
@@ -37,6 +39,8 @@ function App() {
               <Switch>
                 <Route exact path="/" component={Homepage} />
                 <Route path="/about" component={About} />
+                <Route path="/work" component={Technologies} />
+                <Route path="/contact" component={Contact} />
                 {/* <Route path="*" component={NotFound} /> */}
               </Switch>
               </ToastProvider>
